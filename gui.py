@@ -315,7 +315,7 @@ class NetworkExplorerView(QtWidgets.QGraphicsView):
         self._dense_base_brushes.clear()
 
         input_size = int(blueprint.get("input_size", 0))
-        hidden_sizes: Iterable[int] = blueprint.get("hidden_sizes", [])  # type: ignore[assignment]
+        hidden_sizes: Iterable[int] = blueprint.get("hidden_sizes", [])
         output_size = int(blueprint.get("output_size", 0))
         dropout_rate = float(blueprint.get("dropout", 0.0))
 
@@ -367,7 +367,7 @@ class NetworkExplorerView(QtWidgets.QGraphicsView):
         self._draw_connectors(element_rects)
         self._finalize_scene()
 
-    def wheelEvent(self, event: QtGui.QWheelEvent) -> None:  # type: ignore[override]
+    def wheelEvent(self, event: QtGui.QWheelEvent) -> None:
         delta = event.angleDelta().y()
         if delta == 0:
             super().wheelEvent(event)

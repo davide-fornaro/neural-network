@@ -51,9 +51,9 @@ class DenseLayer(Layer):
         """Backpropagate gradient through linear transformation."""
         dZ = dZ.astype(self.dtype, copy=False)
         self.dZ = dZ
-        m = self.X.shape[1]  # type: ignore[union-attr]
+        m = self.X.shape[1]
         inv_m = np.float32(1.0 / m)
-        self.dW = inv_m * (dZ @ self.X.T)  # type: ignore[union-attr]
+        self.dW = inv_m * (dZ @ self.X.T)
         self.db = inv_m * np.sum(dZ, axis=1, keepdims=True)
         dX = self.W.T @ dZ
         return dX
@@ -71,7 +71,7 @@ class ReLULayer(Layer):
         return self.A
 
     def backward(self, dA: np.ndarray) -> np.ndarray:
-        return dA * ReLU_deriv(self.Z)  # type: ignore[union-attr]
+        return dA * ReLU_deriv(self.Z)
 
 
 class DropoutLayer(Layer):
@@ -112,7 +112,7 @@ class SoftmaxLayer(Layer):
         return self.A
 
     def backward(self, Y: np.ndarray) -> np.ndarray:
-        return (self.A - Y)  # type: ignore[operator]
+        return (self.A - Y)
 
 
 class CrossEntropyLoss:
@@ -131,4 +131,4 @@ class CrossEntropyLoss:
         return float(-np.sum(Y * np.log(A_clipped)) / m)
 
     def backward(self) -> np.ndarray:
-        return self.A - self.Y  # type: ignore[operator]
+        return self.A - self.Y

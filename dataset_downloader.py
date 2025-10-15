@@ -80,11 +80,11 @@ class DatasetDownloader:
             raise ValueError(f"Unsupported dataset '{name}'.")
         dataset_dir = self.data_dir / name
         dataset_dir.mkdir(parents=True, exist_ok=True)
-        for file_info in self._CONFIG[name]["files"]:  # type: ignore[index]
-            filename = file_info["filename"]  # type: ignore[index]
-            url = file_info["url"]  # type: ignore[index]
+        for file_info in self._CONFIG[name]["files"]:
+            filename = file_info["filename"]
+            url = file_info["url"]
             target = dataset_dir / filename
-            expected_md5 = file_info.get("md5")  # type: ignore[union-attr]
+            expected_md5 = file_info.get("md5")
             needs_download = True
             if target.exists():
                 if expected_md5 and self._check_md5(target, str(expected_md5)):
@@ -99,7 +99,7 @@ class DatasetDownloader:
                 if expected_md5 and not self._check_md5(target, str(expected_md5)):
                     target.unlink(missing_ok=True)
                     raise ValueError(f"Checksum mismatch for {filename}.")
-            if file_info.get("extract") == "tar":  # type: ignore[union-attr]
+            if file_info.get("extract") == "tar":
                 extracted_dir = dataset_dir / "cifar-10-batches-py"
                 if not extracted_dir.exists():
                     self._extract_tar(target, dataset_dir)
@@ -125,8 +125,8 @@ class DatasetDownloader:
             raise ValueError("split must be 'train' or 'test'.")
         dataset_dir = self.ensure_dataset(name)
         config = self._CONFIG[name.lower()]
-        loader_type = config["type"]  # type: ignore[index]
-        num_classes = int(config["num_classes"])  # type: ignore[index]
+        loader_type = config["type"]
+        num_classes = int(config["num_classes"])
         if loader_type == "mnist_like":
             return self._load_mnist_like(dataset_dir, split, normalize, one_hot_labels, limit, num_classes)
         if loader_type == "cifar10":
@@ -219,8 +219,8 @@ class DatasetDownloader:
             batch_path = batches_dir / batch_name
             with open(batch_path, "rb") as fh:
                 batch = pickle.load(fh, encoding="latin1")
-            data_list.append(batch["data"])  # type: ignore[index]
-            label_list.append(np.asarray(batch["labels"], dtype=np.int64))  # type: ignore[index]
+            data_list.append(batch["data"])
+            label_list.append(np.asarray(batch["labels"], dtype=np.int64))
         data = np.concatenate(data_list, axis=0)
         labels = np.concatenate(label_list, axis=0)
         if limit is not None:

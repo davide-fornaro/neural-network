@@ -41,7 +41,7 @@ class NeuralNetwork:
         self.layers.append(SoftmaxLayer())
 
         # set optimizer to operate on trainable layers (Dense layers)
-        self.optimizer = optimizer_cls(self.layers, lr=lr)  # type: ignore[call-arg]
+        self.optimizer = optimizer_cls(self.layers, lr=lr)
         self.criterion = CrossEntropyLoss()
 
     def forward(self, X: np.ndarray, training: bool = False) -> np.ndarray:
@@ -51,7 +51,7 @@ class NeuralNetwork:
             if isinstance(layer, DropoutLayer):
                 A = layer.forward(A, training=training)
             else:
-                A = layer.forward(A)  # type: ignore[arg-type]
+                A = layer.forward(A)
         return A
 
     def compute_loss(self, A: np.ndarray, Y: np.ndarray) -> float:
@@ -69,7 +69,7 @@ class NeuralNetwork:
         # self.layers[-1] is SoftmaxLayer
         assert isinstance(self.layers[-1], SoftmaxLayer)
         for layer in reversed(self.layers[:-1]):
-            dZ = layer.backward(dZ)  # type: ignore[arg-type]
+            dZ = layer.backward(dZ)
         # update parameters of trainable layers
         self.optimizer.step()
 
