@@ -113,12 +113,6 @@ Avvia l’applicazione grafica:
 python gui.py
 ```
 
-Funzionalità principali:
-- Sezione Configurazione: dataset, ottimizzatore, epochs, batch size, learning rate, dropout, hidden layers (es. `256,128,64`), limiti train/test, intervallo valutazione, seed.
-- Controlli: Avvia/Ferma + barra di avanzamento + log.
-- Metriche: grafici Loss, Accuracy (train/test) aggiornati a ogni epoch.
-- Predizioni: galleria dei primi 100 esempi del test set con confidenza e indicazione corretto/errato.
-
 ### CLI (scriptabile e riproducibile)
 
 Mostra l’help:
@@ -153,12 +147,3 @@ python main.py --dataset cifar10 --optimizer AdamW --epochs 50 --batch-size 128 
 ```
 
 I dataset vengono scaricati in `data/<dataset>/` al primo utilizzo (cache locale persistente).
-
----
-
-## Consigli pratici e prestazioni
-
-- CIFAR-10 è più impegnativo: inizia con pochi epoch e hidden layer piccoli (es. `128,64`) e batch size moderato (128-256).
-- `SGD` è semplice ma potrebbe convergere lentamente; `SGDMomentum`/`Adam`/`AdamW` tendono a stabilizzare e accelerare.
-- `dropout` aiuta a regolarizzare su modelli con molti neuroni; parti da `0.1`-`0.2`.
-- Imposta `--train-limit` per prototipare rapidamente.
