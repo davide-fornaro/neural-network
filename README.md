@@ -81,7 +81,7 @@ pip install -r requirements.txt
 - Sequenza generata a partire da `layer_sizes = [n_in, h1, h2, ..., n_out]`:
   - Per ogni transizione `n_in → h`: `Dense(h)` → `ReLU` → (opzionale `Dropout`)
   - Uscita: `Softmax`
-- Inizializzazione He per gli strati densi (`W ~ N(0, \sqrt{2/d_in})`, `b=0`).
+- Inizializzazione He per gli strati densi ($W \sim \mathcal{N}(0, \sqrt{2/d_{in}})$, $b=0$).
 - Loss: `CrossEntropyLoss` (con clipping numerico interno).
 - Backprop: gradienti da CrossEntropy+Softmax, poi propagazione inversa e `optimizer.step()`.
 
