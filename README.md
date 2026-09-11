@@ -6,6 +6,8 @@
 
 Rete neurale feedforward (MLP) scritta in NumPy per la classificazione su MNIST, Fashion-MNIST e CIFAR-10, con interfaccia grafica (PyQt5) per l’addestramento, la visualizzazione dell’architettura, l’andamento delle metriche e un’anteprima delle predizioni.
 
+Questo progetto è stato sviluppato per comprendere a fondo l'algebra lineare e il calcolo alla base del deep learning. Sono stati utilizzati assistenti di intelligenza artificiale per accelerare la generazione del codice boilerplate (es. configurazione della GUI PyQt5, parser dei dataset) e per effettuare il refactoring del codice secondo rigorosi standard di tipizzazione, permettendomi di concentrarmi sulla correttezza matematica del motore di auto-differenziazione custom.
+
 ---
 
 ## Caratteristiche principali
